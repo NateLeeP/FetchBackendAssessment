@@ -65,6 +65,11 @@ module.exports = (req, res) => {
     // Handle case where not enough points are available
     res.status(200).send("Not enough points available for transaction!")
   }
-  res.status(200).send(payerPointsTaken)
+  /// modify payerPointsTaken object to array
+  var pointsTakenArray = [];
+  for (var key of Object.keys(payerPointsTaken)) {
+    pointsTakenArray.push({"payer":key, "points": payerPointsTaken[key]})
+  }
+  res.status(200).send(pointsTakenArray)
 }
 
