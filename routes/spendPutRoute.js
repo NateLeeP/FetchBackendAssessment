@@ -73,6 +73,6 @@ module.exports = (req, res) => {
   for (var key of Object.keys(payerPointsSpent)) {
     pointsSpentArray.push({"payer":key, "points": payerPointsSpent[key]})
   }
-  res.status(200).send(pointsSpentArray)
+  res.status(201).send(pointsSpentArray)
 }
 
