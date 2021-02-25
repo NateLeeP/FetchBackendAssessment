@@ -8,5 +8,5 @@ module.exports = (req, res) => {
   var newTransactions = {payer, points, timestamp: new Date(timestamp)}
   transactions.push(newTransactions);
 
-  res.status(201).send('Ok')
+  res.status(201).send('Transaction Added')
 }
