@@ -1,5 +1,5 @@
 # Fetch Backend Assessment
-Backend service for tracking client transactions and payer point totals
+Backend service for tracking client transactions and payer point totals.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Interact with the service using the following endpoints:
 
 `GET /transaction`
 
-  Responds with array of transaction objects. Note: These are __NOT__ guaranteed to be in chronilogical order
+  Responds with array of transaction objects. Note: These are __NOT__ guaranteed to be in chronological order.
 
 
 `POST /transaction`
@@ -44,13 +44,13 @@ Interact with the service using the following endpoints:
   | ------------ | ------- | ----------------- |
   | points       | integer | points spent      |
 
-  Response: Array of objects showing total points subtracted from each payer
+  Response: Array of objects showing total points subtracted from each payer.
 
 `GET /balance`
 
-  Current point balances
+  Current point balances.
 
-  Reponse: JSON object with key-value pairs corresponding to payer-point totals
+  Reponse: JSON object with key-value pairs corresponding to payer-point totals.
   
 ## Send 
 
