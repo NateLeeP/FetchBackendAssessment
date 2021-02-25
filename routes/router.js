@@ -4,6 +4,7 @@ const transactionPostRouteFunc = require('./transactionPostRoute.js')
 const transactionGetRouteFunc = require('./transactionGetRoute.js')
 const spendPutFunc = require('./spendPutRoute.js');
 const pointsBalanceFunc = require('./pointsBalanceGetRoute.js')
+
 // router middleware to parse JSON body
 router.use(express.json());
 

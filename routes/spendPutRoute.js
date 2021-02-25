@@ -1,19 +1,21 @@
 const transactions = require('./memory.js');
 
-const pointsTaken = (transaction, transactionIndex) => {
-  // Helper function for determining how many points can be taken from transaction
-  // Must satsify rule: Cannot take points that would cause a negative balance down the line.
+const pointsSpent = (transaction, transactionIndex) => {
+  // Helper function for determining how many points can be taken from given transaction
 
-  // if transaction points are negative, return 0. Cannot extract any points from negative
+  // Rule #1: Cannot take points that would cause a negative balance down the line.
+  // Rule #2: Points must be taken from oldest dated transaction
+
+  // If transaction points are negative, return 0. Cannot extract any points from negative transaction
   if (transaction['points'] <= 0) {
     return 0;
   }
-  // find cumulative min from this transaction.
+  // Find minimum of cumulative total, moving chronilogically from this transaction.
+  // The minimum of the cumlative total is how many points can be taken from a given transaction without going negative
   var cumulativeTotal = transaction['points']
-  var cumulativeMin = transaction['points'] // inital min is transaction points. Cannot take more than this from transaction.
-  // cumulative total to track, update cumulative min when it hits a low point
+  var cumulativeMin = transaction['points']
 
-  // loop through transactions occuring after current transaction
+  // Loop through transactions occuring after current transaction
 
   for (var i = transactionIndex + 1; i < transactions.length; i++) {
     if (transaction['payer'] === transactions[i]['payer']) {
@@ -29,32 +31,33 @@ const pointsTaken = (transaction, transactionIndex) => {
 }
 
 
-// spend points route
+// Spend points route function
 module.exports = (req, res) => {
-  // points needed
+  // Points needed
   var {points} = req.body
-  // track who is giving up points
-  var payerPointsTaken = {}
-  // sort transactions by time stamp
+  // Track what payer points are being spent
+  var payerPointsSpent = {}
+  // Sort transactions by time stamp
   transactions.sort((a, b) => (a.timestamp - b.timestamp))
+
   var index = 0;
   // Loop through transactions. For each, find out how many points can be taken
   while (points > 0 && index < transactions.length) {
-      // subtract points available from transaction total
-      var ptsAvailable = pointsTaken(transactions[index], index)
+      var ptsAvailable = pointsSpent(transactions[index], index)
       if (ptsAvailable > points) {
         // If more points available than needed
         ptsAvailable = points;
       }
+      // Subtract points available from transaction total
       points -= ptsAvailable;
       if (ptsAvailable > 0) {
-        // If take more than 0 points, keep track in "payerPointsTaken" object
-        if (payerPointsTaken[transactions[index]['payer']]) {
-          payerPointsTaken[transactions[index]['payer']] -= ptsAvailable;
+        // If more than 0 points available, keep track in "payerPointsSpent" object
+        if (payerPointsSpent[transactions[index]['payer']]) {
+          payerPointsSpent[transactions[index]['payer']] -= ptsAvailable;
         } else {
-          payerPointsTaken[transactions[index]['payer']] = ptsAvailable * (-1);
+          payerPointsSpent[transactions[index]['payer']] = ptsAvailable * (-1);
         }
-        // subtract from transaction in memory
+        // Subtract from transaction in memory
 
         transactions[index]['points'] -= ptsAvailable;
       }
@@ -65,11 +68,11 @@ module.exports = (req, res) => {
     // Handle case where not enough points are available
     res.status(200).send("Not enough points available for transaction!")
   }
-  /// modify payerPointsTaken object to array
-  var pointsTakenArray = [];
-  for (var key of Object.keys(payerPointsTaken)) {
-    pointsTakenArray.push({"payer":key, "points": payerPointsTaken[key]})
+  /// modify payerPointsSpent object to array
+  var pointsSpentArray = [];
+  for (var key of Object.keys(payerPointsSpent)) {
+    pointsSpentArray.push({"payer":key, "points": payerPointsSpent[key]})
   }
-  res.status(200).send(pointsTakenArray)
+  res.status(200).send(pointsSpentArray)
 }
 
