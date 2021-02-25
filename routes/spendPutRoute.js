@@ -10,7 +10,7 @@ const pointsSpent = (transaction, transactionIndex) => {
   if (transaction['points'] <= 0) {
     return 0;
   }
-  // Find minimum of cumulative total, moving chronilogically from this transaction.
+  // Find minimum of cumulative total, moving chronologically from this transaction.
   // The minimum of the cumlative total is how many points can be taken from a given transaction without going negative
   var cumulativeTotal = transaction['points']
   var cumulativeMin = transaction['points']
