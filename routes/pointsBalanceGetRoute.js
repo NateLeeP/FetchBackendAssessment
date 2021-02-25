@@ -1,7 +1,7 @@
 const transactions = require('./memory.js');
 
 module.exports = (req, res) => {
-  // function to return blaances for payers
+  // Route function responding with point balances for payers
 
   // point balance object
   balances = {};
