@@ -29,7 +29,7 @@ Interact with the service using the following endpoints:
 
   | Parameter    | Type    | Description                                                    |
   | ------------ | ------- | ---------------------------------------------------------------|
-  | payer        | string  | Name of payer.(REQUIRED)                                       |
+  | payer        | string  | Name of payer. (REQUIRED)                                       |
   | points       | integer | Points added/subtracted during transaction. (REQUIRED)         |
   | date         | string  | Date in form of 'YYYY-MM-DD' E.G: 2021-02-25                   |
   | time         | string  | Time in military E.G: 11:30 for 11:30 a.m., 14:30 for 2:30 p.m.|
