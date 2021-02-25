@@ -37,6 +37,7 @@ Body Parameters
 Response: `201 Transaction Added`
 
 `PUT /spend`
+
 Spend points from customer balances.
 
 | Parameter    | Type    | Description       |
@@ -46,6 +47,7 @@ Spend points from customer balances.
 Response: Array of objects showing total points subtracted from each payer
 
 `GET /balance`
+
 Current point balances
 
 Reponse: JSON object with key-value pairs corresponding to payer-point totals
