@@ -4,11 +4,16 @@
   "description": "Backend Assessment for Fetch",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.21.1",
+    "chai": "^4.3.0",
+    "express": "^4.17.1",
+    "mocha": "^8.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lodash": "^4.17.21"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "repository": {
