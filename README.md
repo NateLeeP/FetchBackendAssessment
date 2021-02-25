@@ -26,7 +26,7 @@ Interact with the service using the following endpoints:
   Add a new transaction.
 
   Body Parameters
-
+"
   | Parameter    | Type    | Description                                                    |
   | ------------ | ------- | ---------------------------------------------------------------|
   | payer        | string  | Name of payer. (REQUIRED)                                       |
@@ -62,10 +62,19 @@ To test service against provided example, run
 npm test
 ```
 
-To submit request via command line, use curl 
+To submit request via Linux shell, use curl 
 ```
-curl -X POST http://localhost:3000/transaction -H "Content-Type: application/json" -d "{\"payer\":\"DANNON\", \"points\":300, \"date\":\"2020-10-31\", \"time\":\"14:30\"}
+curl -X POST http://localhost:3000/transaction -H "Content-Type: application/json" -d "{\"payer\":\"DANNON\", \"points\":300, \"date\":\"2020-10-31\", \"time\":\"14:30\"}"
 ```
+GET balance
+```
+curl http://localhost:3000/balance
+```
+PUT spend
+```
+curl -X PUT http://loclahost:3000/spend -H "Content-Type: application/json" -d "{\"points\":200}"
+```
+
 
 
 
