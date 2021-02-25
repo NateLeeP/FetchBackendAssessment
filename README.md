@@ -51,6 +51,8 @@ Interact with the service using the following endpoints:
   Current point balances
 
   Reponse: JSON object with key-value pairs corresponding to payer-point totals
+  
+## Send 
 
 ## Test
 
@@ -59,4 +61,11 @@ To test service against provided example, run
 ```
 npm test
 ```
+
+To submit request via command line, use curl 
+```
+curl -X POST http://localhost:3000/transaction -H "Content-Type: application/json" -d "{\"payer\":\"DANNON\", \"points\":300, \"date\":\"2020-10-31\", \"time\":\"14:30\"}
+```
+
+
 
